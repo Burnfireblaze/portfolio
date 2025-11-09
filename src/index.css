@@ -137,6 +137,7 @@
     --leading-relaxed: 1.625;
     --radius-2xl: 1rem;
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+    --animate-spin: spin 1s linear infinite;
     --blur-sm: 8px;
     --blur-md: 12px;
     --blur-xl: 24px;
@@ -838,6 +839,10 @@
 
   .transform {
     transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
+  }
+
+  .animate-spin {
+    animation: var(--animate-spin);
   }
 
   .cursor-pointer {
@@ -2284,8 +2289,16 @@
     pointer-events: none;
   }
 
+  .disabled\:cursor-not-allowed:disabled {
+    cursor: not-allowed;
+  }
+
   .disabled\:opacity-50:disabled {
     opacity: .5;
+  }
+
+  .disabled\:opacity-70:disabled {
+    opacity: .7;
   }
 
   .has-\[\>svg\]\:px-2\.5:has( > svg) {
@@ -2944,4 +2957,10 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

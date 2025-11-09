@@ -1,62 +1,33 @@
 import { motion } from "motion/react";
-import { Mail, Linkedin, Github, MapPin, Download, Phone } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Download, Phone, Loader2 } from "lucide-react";
 import { toast } from "sonner@2.0.3";
+import { useState } from "react";
 
 export function Contact() {
-  const handleDownloadResume = () => {
-    // Create a blob with the resume content
-    const resumeContent = `SUDARSAN SRIVATHSUN
-Davis, CA | +1 (530)-231-0028 | srisudarsan2000@gmail.com
-www.linkedin.com/in/sudarsan-srivathsun | https://github.com/Burnfireblaze
 
-SUMMARY
-Former software engineer with 3+ years of experience in full stack development. Proficient in programming languages including Python, C, C++, and JavaScript. Skilled in deep learning, AI, and building secure, scalable, and user-centric applications. Intuitive in developing CI/CD DevOps pipelines, designing ETL pipelines, and deploying solutions on Cloud platforms with a focus on Microsoft Azure. Adept in Agile development methodologies, object-oriented design and the Scrum framework, collaborating effectively in cross-functional and fast paced teams.
+  const [isDownloading, setIsDownloading] = useState(false);
 
-EDUCATION
-UNIVERSITY OF CALIFORNIA, DAVIS | September 2025 - June 2027
-Master of Science, Computer Science
+  const handleDownloadResume = async () => {
+  setIsDownloading(true);
+  try {
+    const fileId = '120_tyqZI0oT-930G8Z_x69s7hDuvTbJl';
+    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
 
-SRM INSTITUTE OF SCIENCE AND TECHNOLOGY | June 2018 - May 2022
-Bachelor of Technology, Computer Science and Engineering | GPA: 8.76/10.00
-
-WORK EXPERIENCE
-AB INBEV GCC SERVICES INDIA PRIVATE LIMITED | Bengaluru, India
-Software Engineer 2 | November 2024 - July 2025
-• Reduced module delivery time from 7 months to 3 months by leading a 10-member development team
-• Built reusable APIs and components utilizing React, Flask, MSSQL, Azure
-
-Software Engineer 1 | August 2022 - October 2024
-• Reduced API response time from 20 seconds to milliseconds for 200+ North America users
-• Led 2-developer team to secure application against OWASP Top 10 vulnerabilities
-• Delivered workload savings equivalent to 1.5 FTEs through automation
-
-Software Engineering Intern | July 2021 - July 2022
-• Enhanced UX for 3,000+ users by reducing click count from 5 to 2
-• Reduced retailer onboarding time from 5 days to 1 day for 1,000+ users
-
-SKILLS
-Languages: C/C++, HTML5, CSS, JavaScript, SQL, Python
-Frameworks: React, Redux, Node.js, Flask, TensorFlow, Keras
-Cloud: Azure, IBM Watson
-Databases: MSSQL, MySQL, Snowflake
-
-CERTIFICATIONS
-• AZ-900: Microsoft Azure Fundamentals
-• Progressive Web Apps (Udemy)
-• Front-End Web Development with React (Coursera)`;
-
-    const blob = new Blob([resumeContent], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Sudarsan_Srivathsun_Resume.txt';
+    link.href = downloadUrl;
+    link.setAttribute('download', 'Resume - Sudarsan Srivathsun.pdf');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-    
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     toast.success('Resume downloaded successfully!');
-  };
+  } catch (error) {
+    toast.error('Failed to download resume');
+  } finally {
+    setIsDownloading(false);
+  }
+};
 
   const contactInfo = [
     {
@@ -303,20 +274,27 @@ CERTIFICATIONS
           >
             <motion.button
               onClick={handleDownloadResume}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-cyan-600 rounded-xl overflow-hidden transition-all"
+              disabled={isDownloading}
+              whileHover={!isDownloading ? { scale: 1.05 } : {}}
+              whileTap={!isDownloading ? { scale: 0.95 } : {}}
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-cyan-600 rounded-xl overflow-hidden transition-all disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <span className="relative z-10 flex items-center gap-3 text-white text-lg">
-                <Download className="w-5 h-5" />
-                Download Resume
+                {isDownloading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Download className="w-5 h-5" />
+                )}
+                {isDownloading ? "Downloading..." : "Download Resume"}
               </span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-violet-600"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
+              {!isDownloading && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-violet-600"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
             </motion.button>
             <p className="mt-4 text-gray-400 text-sm">
               Get a copy of my complete resume with all details

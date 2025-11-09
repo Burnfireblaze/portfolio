@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 
 const navItems = [
   { name: "Home", id: "hero" },
   { name: "About", id: "about" },
-  { name: "Projects", id: "projects" },
   { name: "Experience", id: "experience" },
+  { name: "Projects", id: "projects" },
   { name: "Skills", id: "skills" },
   { name: "Awards", id: "awards" },
   { name: "Contact", id: "contact" }
@@ -16,6 +16,7 @@ const navItems = [
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,6 +52,27 @@ export function Navigation() {
     setIsOpen(false);
   };
 
+  const handleDownloadResume = async () => {
+    setIsDownloading(true);
+    try {
+      // Direct Google Drive download link (replace with your own file ID)
+      const fileId = '120_tyqZI0oT-930G8Z_x69s7hDuvTbJl';
+      const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.setAttribute('download', 'Resume - Sudarsan Srivathsun.pdf');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Optional: simulate download time for loading animation
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+  
   return (
     <>
       <motion.nav
@@ -98,19 +120,17 @@ export function Navigation() {
 
               {/* Resume Button - Desktop */}
               <Button
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = '/assets/Resume - Sudarsan Srivathsun.pdf';
-                  link.download = 'Resume - Sudarsan Srivathsun.pdf';
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
+                onClick={handleDownloadResume}
+                disabled={isDownloading}
                 size="sm"
-                className="hidden md:flex bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-600 hover:to-cyan-600 border-0 rounded-full gap-2"
+                className="hidden md:flex bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-600 hover:to-cyan-600 border-0 rounded-full gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <Download className="w-4 h-4" />
-                Resume
+                {isDownloading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Download className="w-4 h-4" />
+                )}
+                {isDownloading ? "Downloading..." : "Resume"}
               </Button>
 
               {/* Mobile Menu Button */}
@@ -152,16 +172,26 @@ export function Navigation() {
           ))}
           
           {/* Mobile Resume Button */}
-          <motion.a
-            href="/assets/Resume - Sudarsan Srivathsun.pdf"
-            download="Resume - Sudarsan Srivathsun.pdf"
+          <motion.button
+            onClick={handleDownloadResume}
+            disabled={isDownloading}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 20 }}
             transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
-            className="mt-4 px-4 py-3 bg-gradient-to-r from-violet-500 to-cyan-500 text-white rounded-lg text-center"
+            className="mt-4 px-4 py-3 bg-gradient-to-r from-violet-500 to-cyan-500 text-white rounded-lg text-center flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            Resume
-          </motion.a>
+            {isDownloading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Downloading...
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4" />
+                Resume
+              </>
+            )}
+          </motion.button>
         </div>
       </motion.div>
 
