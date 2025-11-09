@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowDown, Sparkles, Code, Code2 } from "lucide-react";
+import { ArrowDown, Sparkles, Code, Code2, Github, Linkedin, Mail, Phone } from "lucide-react";
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -121,6 +121,41 @@ export function Hero() {
             </motion.span>
           </span>
         </motion.h1>
+
+        {/* Social Media Icons */}
+        <motion.div
+          className="flex items-center justify-center gap-4 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          {[
+            { icon: Github, href: "https://github.com/Burnfireblaze", label: "GitHub" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/sudarsan-srivathsun/", label: "LinkedIn" },
+            { icon: Phone, href: "tel:+15302310028", label: "Phone" },
+            { icon: Mail, href: "mailto:srisudarsan2000@gmail.com", label: "Email" }
+          ].map((social, index) => (
+            <motion.a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="p-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm hover:border-violet-400 hover:bg-violet-500/20 transition-all"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
+              whileHover={{ 
+                scale: 1.1, 
+                y: -3,
+                boxShadow: "0 0 20px rgba(124, 58, 237, 0.4)"
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <social.icon className="w-5 h-5 text-violet-400" />
+            </motion.a>
+          ))}
+        </motion.div>
 
         {/* Title with rotating code symbol */}
         <motion.div
