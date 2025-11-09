@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowDown, Sparkles, Code, Code2, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -12,6 +13,31 @@ export function Hero() {
     "Machine Learning Engineer",
     "AI Developer"
   ];
+
+  // Generate stable particle data after mount to avoid re-render issues
+  const [particles, setParticles] = useState<Array<{
+    initialX: number;
+    initialY: number;
+    initialOpacity: number;
+    targetX: number;
+    targetY: number;
+    targetOpacity: number;
+    duration: number;
+  }>>([]);
+
+  useEffect(() => {
+    // Generate particles once on mount
+    const generatedParticles = [...Array(25)].map(() => ({
+      initialX: Math.random() * window.innerWidth,
+      initialY: Math.random() * window.innerHeight,
+      initialOpacity: Math.random() * 0.5 + 0.2,
+      targetX: Math.random() * window.innerWidth,
+      targetY: Math.random() * window.innerHeight,
+      targetOpacity: Math.random() * 0.5 + 0.2,
+      duration: Math.random() * 20 + 10
+    }));
+    setParticles(generatedParticles);
+  }, []);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
@@ -32,22 +58,22 @@ export function Hero() {
 
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(25)].map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-violet-500 rounded-full"
             initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: Math.random() * 0.5 + 0.2
+              x: particle.initialX,
+              y: particle.initialY,
+              opacity: particle.initialOpacity
             }}
             animate={{
-              y: [null, Math.random() * window.innerHeight],
-              x: [null, Math.random() * window.innerWidth],
-              opacity: [null, Math.random() * 0.5 + 0.2]
+              y: [null, particle.targetY],
+              x: [null, particle.targetX],
+              opacity: [null, particle.targetOpacity]
             }}
             transition={{
-              duration: Math.random() * 20 + 10,
+              duration: particle.duration,
               repeat: Infinity,
               repeatType: "reverse"
             }}
