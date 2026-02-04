@@ -56,7 +56,7 @@ export function Navigation() {
     setIsDownloading(true);
     try {
       // Direct Google Drive download link (replace with your own file ID)
-      const fileId = '120_tyqZI0oT-930G8Z_x69s7hDuvTbJl';
+      const fileId = '1ptPjO_vwppx3-J7HdbUyCRVjwXZZvVZJ';
       const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
 
       const link = document.createElement('a');
