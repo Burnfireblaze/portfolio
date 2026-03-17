@@ -10,7 +10,7 @@ const navItems = [
   { name: "Projects", id: "projects" },
   { name: "Skills", id: "skills" },
   { name: "Awards", id: "awards" },
-  { name: "Contact", id: "contact" }
+  { name: "Contact", id: "contact" },
 ];
 
 export function Navigation() {
@@ -28,7 +28,9 @@ export function Navigation() {
         return;
       }
 
-      const sections = navItems.slice(1).map(item => document.getElementById(item.id));
+      const sections = navItems
+        .slice(1)
+        .map((item) => document.getElementById(item.id));
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
@@ -45,9 +47,10 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = id === "hero" 
-      ? document.querySelector('section')
-      : document.getElementById(id);
+    const element =
+      id === "hero"
+        ? document.querySelector("section")
+        : document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
     setIsOpen(false);
   };
@@ -56,12 +59,12 @@ export function Navigation() {
     setIsDownloading(true);
     try {
       // Direct Google Drive download link (replace with your own file ID)
-      const fileId = '1ptPjO_vwppx3-J7HdbUyCRVjwXZZvVZJ';
+      const fileId = "1_ZHMzreGQbSk9iwevbr6h2y25NNY3gZp";
       const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
 
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = downloadUrl;
-      link.setAttribute('download', 'Resume - Sudarsan Srivathsun.pdf');
+      link.setAttribute("download", "Resume - Sudarsan Srivathsun.pdf");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -72,7 +75,7 @@ export function Navigation() {
       setIsDownloading(false);
     }
   };
-  
+
   return (
     <>
       <motion.nav
@@ -104,7 +107,13 @@ export function Navigation() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className={activeSection === item.id ? 'text-white' : 'text-white/60'}>
+                    <span
+                      className={
+                        activeSection === item.id
+                          ? "text-white"
+                          : "text-white/60"
+                      }
+                    >
                       {item.name}
                     </span>
                     {activeSection === item.id && (
@@ -138,7 +147,11 @@ export function Navigation() {
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden text-white p-2"
               >
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </motion.button>
             </div>
           </div>
@@ -148,13 +161,13 @@ export function Navigation() {
       {/* Mobile Menu */}
       <motion.div
         initial={{ opacity: 0, x: "100%" }}
-        animate={{ 
+        animate={{
           opacity: isOpen ? 1 : 0,
-          x: isOpen ? 0 : "100%"
+          x: isOpen ? 0 : "100%",
         }}
         transition={{ duration: 0.3 }}
         className={`fixed top-0 right-0 bottom-0 w-64 bg-black/95 backdrop-blur-xl border-l border-violet-500/20 z-40 md:hidden ${
-          isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+          isOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
         <div className="flex flex-col gap-2 p-8 pt-20">
@@ -170,7 +183,7 @@ export function Navigation() {
               {item.name}
             </motion.button>
           ))}
-          
+
           {/* Mobile Resume Button */}
           <motion.button
             onClick={handleDownloadResume}
