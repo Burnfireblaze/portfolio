@@ -18,7 +18,7 @@ const projects: Project[] = [
   {
     icon: Database,
     title: "ResilientDB SQL Connector (RESQL)",
-    period: "September 2025 - Present",
+    period: "September 2025 - March 2026",
     description: "Developing RESQL, a SQL-based connector for ResilientDB, a blockchain-inspired distributed database system. The project replaces traditional key-value storage with SQL-based relational storage using DuckDB and SQLite, enabling familiar RDBMS-style querying and structured data management for decentralized applications.",
     achievements: [
       "Designed and implemented a C++ integration layer to translate SQL queries into ResilientDB's distributed transaction format",
@@ -28,12 +28,12 @@ const projects: Project[] = [
     ],
     tags: ["C++", "Python", "Docker", "DuckDB", "SQLite", "ResilientDB"],
     color: "violet",
-    workInProgress: true
+    workInProgress: false
   },
   {
     icon: Network,
     title: "SDR-Based UDP Reliability Protocol",
-    period: "September 2025 - Present",
+    period: "September 2025 - December 2025",
     description: "Developing a Selective Repeat + Erasure Coding (EC-MDS-UDP) protocol inspired by SDR-RDMA middleware research, aimed at improving UDP reliability across lossy WANs.",
     achievements: [
       "Implementing reliability mechanisms with Selective Repeat NACKs",
@@ -43,7 +43,7 @@ const projects: Project[] = [
     ],
     tags: ["C++", "Docker", "Python", "Networking"],
     color: "cyan",
-    workInProgress: true
+    workInProgress: false
   },
   {
     icon: Database,
