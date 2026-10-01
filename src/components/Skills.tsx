@@ -1,67 +1,55 @@
 import { motion } from "motion/react";
-import { Code, Database, Cloud, Wrench } from "lucide-react";
+import { Code, Database, Cloud, Server, Bot, Layout } from "lucide-react";
 
 const skillCategories = [
   {
     icon: Code,
     title: "Languages",
-    skills: [
-      { name: "JavaScript", level: 95 },
-      { name: "Python", level: 90 },
-      { name: "C/C++", level: 85 },
-      { name: "SQL", level: 90 },
-      { name: "HTML5/CSS", level: 95 }
-    ],
+    skills: ["C++", "Python", "TypeScript", "JavaScript", "SQL"],
     color: "violet"
   },
   {
-    icon: Wrench,
-    title: "Frameworks & Libraries",
+    icon: Server,
+    title: "Backend & Systems",
     skills: [
-      { name: "React/Redux", level: 95 },
-      { name: "Node.js", level: 90 },
-      { name: "Flask", level: 85 },
-      { name: "TensorFlow/Keras", level: 80 },
-      { name: "Pandas/NumPy", level: 85 },
-      { name: "Selenium", level: 85 },
-      { name: "PDFplumber", level: 80 },
-      { name: "Tabula", level: 80 }
+      "Node.js", "Flask", "FastAPI", "REST APIs", "gRPC", "PBFT consensus",
+      "Reed-Solomon erasure coding", "UDP", "Event-driven architectures",
+      "Observability", "Microservices", "Snyk/Apiiro"
     ],
     color: "cyan"
   },
   {
-    icon: Cloud,
-    title: "Cloud & DevOps",
+    icon: Database,
+    title: "Databases",
+    skills: ["PostgreSQL", "DuckDB", "ChromaDB", "MSSQL", "MySQL", "SQLite", "Snowflake"],
+    color: "pink"
+  },
+  {
+    icon: Bot,
+    title: "AI/ML",
     skills: [
-      { name: "Microsoft Azure", level: 90 },
-      { name: "CI/CD Pipelines", level: 85 },
-      { name: "Docker", level: 80 },
-      { name: "IBM Watson", level: 75 },
-      { name: "Snyk/Apiiro", level: 85 },
-      { name: "Agile/Scrum", level: 90 }
+      "LangGraph", "LangChain", "RAG", "LLM agents", "YOLOv8",
+      "Hugging Face", "PyTorch", "TensorFlow/Keras", "Pandas/NumPy"
     ],
     color: "emerald"
   },
   {
-    icon: Database,
-    title: "Databases & Tools",
-    skills: [
-      { name: "MSSQL", level: 90 },
-      { name: "MySQL", level: 85 },
-      { name: "Snowflake", level: 80 },
-      { name: "Git", level: 95 },
-      { name: "Figma", level: 85 }
-    ],
-    color: "pink"
+    icon: Cloud,
+    title: "Cloud & Infrastructure",
+    skills: ["Microsoft Azure", "AWS", "GCP", "Docker", "Kubernetes", "Kafka", "CI/CD Pipelines", "Git"],
+    color: "violet"
+  },
+  {
+    icon: Layout,
+    title: "Frontend",
+    skills: ["React/Redux", "HTML5/CSS"],
+    color: "cyan"
   }
 ];
 
 const certifications = [
   "AZ-900: Microsoft Azure Fundamentals",
-  "Progressive Web Apps (Udemy)",
-  "Front-End Web Development with React (Coursera)",
-  "HTML, CSS, & Javascript (Coursera)",
-  "Front-End Web UI Frameworks: Bootstrap 4"
+  "Apache Spark SQL for Data Analysts (Databricks)"
 ];
 
 export function Skills() {
@@ -216,41 +204,24 @@ export function Skills() {
                   </div>
 
                   {/* Skills list */}
-                  <div className="space-y-4">
+                  <div className="flex flex-wrap gap-2.5">
                     {category.skills.map((skill, skillIndex) => (
-                      <motion.div
+                      <motion.span
                         key={skillIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: skillIndex * 0.1 }}
+                        transition={{ duration: 0.4, delay: skillIndex * 0.05 }}
+                        whileHover={{ scale: 1.05 }}
+                        className={`px-3 py-1.5 text-sm rounded-full border ${
+                          category.color === 'violet' ? 'bg-violet-500/10 text-violet-300 border-violet-500/30' :
+                          category.color === 'cyan' ? 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30' :
+                          category.color === 'emerald' ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' :
+                          'bg-pink-500/10 text-pink-300 border-pink-500/30'
+                        }`}
                       >
-                        <div className="flex justify-between mb-2">
-                          <span className="text-gray-300">{skill.name}</span>
-                          <span className={`${
-                            category.color === 'violet' ? 'text-violet-400' :
-                            category.color === 'cyan' ? 'text-cyan-400' :
-                            category.color === 'emerald' ? 'text-emerald-400' :
-                            'text-pink-400'
-                          }`}>
-                            {skill.level}%
-                          </span>
-                        </div>
-                        <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: skillIndex * 0.1 + 0.3, ease: "easeOut" }}
-                            className={`h-full rounded-full ${
-                              category.color === 'violet' ? 'bg-gradient-to-r from-violet-600 to-violet-400' :
-                              category.color === 'cyan' ? 'bg-gradient-to-r from-cyan-600 to-cyan-400' :
-                              category.color === 'emerald' ? 'bg-gradient-to-r from-emerald-600 to-emerald-400' :
-                              'bg-gradient-to-r from-pink-600 to-pink-400'
-                            }`}
-                          />
-                        </div>
-                      </motion.div>
+                        {skill}
+                      </motion.span>
                     ))}
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Mail, Linkedin, Github, MapPin, Download, Phone, Loader2 } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Download, Loader2 } from "lucide-react";
 import { toast } from "sonner@2.0.3";
 import { useState } from "react";
 
@@ -36,13 +36,6 @@ export function Contact() {
       value: "srisudarsan2000@gmail.com",
       link: "mailto:srisudarsan2000@gmail.com",
       color: "violet"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+1 (530)-231-0028",
-      link: "tel:+15302310028",
-      color: "cyan"
     },
     {
       icon: Linkedin,

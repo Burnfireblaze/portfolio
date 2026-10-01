@@ -1,18 +1,11 @@
 import { motion } from "motion/react";
-import { ArrowDown, Sparkles, Code, Code2, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { ArrowDown, Sparkles, Code2 } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export function Hero() {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
-
-  const roles = [
-    "Software Engineer",
-    "Full Stack Developer",
-    "Machine Learning Engineer",
-    "AI Developer"
-  ];
 
   // Generate stable particle data after mount to avoid re-render issues
   const [particles, setParticles] = useState<Array<{
@@ -119,16 +112,6 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Hello, I'm text */}
-        <motion.p
-          className="text-gray-400 mb-4"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          Hello, I'm
-        </motion.p>
-
         {/* Name */}
         <motion.h1
           className="text-white mb-6"
@@ -148,41 +131,6 @@ export function Hero() {
           </span>
         </motion.h1>
 
-        {/* Social Media Icons */}
-        <motion.div
-          className="flex items-center justify-center gap-4 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-        >
-          {[
-            { icon: Github, href: "https://github.com/Burnfireblaze", label: "GitHub" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/sudarsan-srivathsun/", label: "LinkedIn" },
-            { icon: Phone, href: "tel:+15302310028", label: "Phone" },
-            { icon: Mail, href: "mailto:srisudarsan2000@gmail.com", label: "Email" }
-          ].map((social, index) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              className="p-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm hover:border-violet-400 hover:bg-violet-500/20 transition-all"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-              whileHover={{ 
-                scale: 1.1, 
-                y: -3,
-                boxShadow: "0 0 20px rgba(124, 58, 237, 0.4)"
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <social.icon className="w-5 h-5 text-violet-400" />
-            </motion.a>
-          ))}
-        </motion.div>
-
         {/* Title with rotating code symbol */}
         <motion.div
           className="flex items-center justify-center gap-3 mb-4"
@@ -197,43 +145,29 @@ export function Hero() {
             <Code2 className="w-8 h-8 text-blue-400" />
           </motion.div>
           <p className="text-2xl md:text-4xl text-gray-300">
-            Full Stack Developer
+            Software Engineer
           </p>
         </motion.div>
 
+        {/* Credentials subtitle */}
+        <motion.p
+          className="text-lg md:text-xl text-gray-400 mb-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.85 }}
+        >
+          MS CS @ UC Davis · Ex-AB InBev (3+ yrs)
+        </motion.p>
+
         {/* Description */}
         <motion.p
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6"
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
-          Crafting seamless digital experiences with 3+ years of expertise in building scalable, user-centric applications
+          Backend engineer with 3+ years of production experience. Working on distributed systems and applied and agentic AI at UC Davis.
         </motion.p>
-
-        {/* Open to roles tags */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <p className="text-gray-400 mb-3 text-sm">Open to roles:</p>
-          <div className="flex flex-wrap justify-center gap-2.5">
-            {roles.map((role, index) => (
-              <motion.span
-                key={role}
-                className="px-4 py-1.5 text-sm rounded-full bg-gradient-to-r from-violet-700 to-purple-700 text-white"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 1.1 + index * 0.1 }}
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(124, 58, 237, 0.4)" }}
-              >
-                {role}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div

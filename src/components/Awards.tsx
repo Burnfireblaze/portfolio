@@ -1,7 +1,24 @@
 import { motion } from "motion/react";
 import { Trophy, Star, Award as AwardIcon } from "lucide-react";
 
-const awards = [
+interface AwardEntry {
+  title: string;
+  organization: string;
+  date: string;
+  description?: string;
+  icon: any;
+  color: string;
+}
+
+const awards: AwardEntry[] = [
+  {
+    title: "1st Place, SacHacks 2026",
+    organization: "SacHacks (at UC Davis)",
+    date: "February 2026",
+    description: "Winning team at SacHacks 2026 (~80 teams) for DentAI, an end-to-end clinical workflow for AI-assisted dental X-ray review.",
+    icon: Trophy,
+    color: "amber"
+  },
   {
     title: "Excellence in Action: Transformation Award",
     organization: "AB InBev",
@@ -206,6 +223,11 @@ export function Awards() {
                       <span className="text-gray-500">•</span>
                       <span className="text-gray-400">{award.date}</span>
                     </div>
+                    {award.description && (
+                      <p className="mt-3 text-gray-300 text-sm leading-relaxed">
+                        {award.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -266,7 +288,7 @@ export function Awards() {
                 transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
                 className="text-4xl md:text-5xl bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-transparent mb-2"
               >
-                Top 8
+                1st Place
               </motion.div>
               <div className="text-gray-400">Hackathon Rank</div>
             </div>

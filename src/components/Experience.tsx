@@ -3,6 +3,21 @@ import { Briefcase, Calendar } from "lucide-react";
 
 const experiences = [
   {
+    company: "UC Davis Health",
+    location: "Davis, CA",
+    roles: [
+      {
+        title: "Research Volunteer",
+        period: "November 2025 - June 2026",
+        achievements: [
+          "Built backend REST APIs for spatial brain-region queries and patient data ingestion for Wirecracker, a clinical decision-support platform used in UC Davis Neurology workflows.",
+          "Integrated interactive visualization frontends for clinical diagnostic workflows.",
+          "Stack: TypeScript, Node.js, PostgreSQL"
+        ]
+      }
+    ]
+  },
+  {
     company: "AB InBev GCC Services India Private Limited",
     location: "Bengaluru, India",
     roles: [
@@ -10,7 +25,7 @@ const experiences = [
         title: "Software Engineer 2",
         period: "November 2024 - July 2025",
         achievements: [
-          "Reduced module delivery time from 7 months to 3 months by leading a 10-member development team to digitize financial reconciliation across 4 global regions",
+          "Reduced module delivery time from 7 months to 3 months by working on an 8-engineer team to digitize financial reconciliation across 5 global regions",
           "Established coding standards, translated functional requirements into technical specifications",
           "Built reusable APIs and components utilizing React, Flask, MSSQL, Azure, enhancing scalability, reliability, security with Snyk"
         ]
@@ -19,7 +34,7 @@ const experiences = [
         title: "Software Engineer 1",
         period: "August 2022 - October 2024",
         achievements: [
-          "Reduced API response time from 20 seconds to milliseconds and digitized a critical process for 200+ North America users",
+          "Cut customer-facing search latency from ~20 seconds to ~200ms",
           "Designed an indexed database schema, implemented microservices engineering principles, built ETL pipelines for seamless integration",
           "Led a 2-developer team to secure the application against OWASP Top 10 vulnerabilities using Snyk and Apiiro",
           "Delivered workload savings equivalent to 1.5 FTEs by architecting a scalable financial reconciliation automation bot from POC to production"
@@ -30,7 +45,7 @@ const experiences = [
         period: "July 2021 - July 2022",
         achievements: [
           "Enhanced UX for 3,000+ users by reducing click count from 5 to 2 in a NPS app using React, Python, SQL",
-          "Reduced retailer onboarding time from 5 days to 1 day for 1,000+ users as the sole developer",
+          "Reduced retailer onboarding time from 5 days to 1 day for 1,000+ retailers as the primary developer, working with the retail ops team",
           "Implemented geo-tagging, address/nearby search, and algorithmic retailer ID generator",
           "Built a complaints user interface serving 1,000+ users using React and Node.js"
         ]

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Database, Package, Bot, ThumbsUp, MapPin, AlertCircle, Trophy, Activity, Lightbulb, Network, Github, ChevronDown, ChevronUp } from "lucide-react";
+import { Database, Bot, Trophy, Activity, Network, Brain, Stethoscope, Github, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
 interface Project {
@@ -19,7 +19,7 @@ const projects: Project[] = [
     icon: Database,
     title: "ResilientDB SQL Connector (RESQL)",
     period: "September 2025 - March 2026",
-    description: "Developing RESQL, a SQL-based connector for ResilientDB, a blockchain-inspired distributed database system. The project replaces traditional key-value storage with SQL-based relational storage using DuckDB and SQLite, enabling familiar RDBMS-style querying and structured data management for decentralized applications.",
+    description: "Developing RESQL, a SQL-based connector for ResilientDB, a Byzantine Fault Tolerant blockchain-inspired distributed database system. The project replaces traditional key-value storage with SQL-based relational storage using DuckDB and SQLite, enabling familiar RDBMS-style querying and structured data management for decentralized applications. Merged into Apache ResilientDB (v1.13.0) via PR #224 (26 commits, +799 lines).",
     achievements: [
       "Designed and implemented a C++ integration layer to translate SQL queries into ResilientDB's distributed transaction format",
       "Integrated DuckDB/SQLite as relational caching layers for local query execution, indexing, and analytical computation",
@@ -32,102 +32,56 @@ const projects: Project[] = [
   },
   {
     icon: Network,
-    title: "SDR-Based UDP Reliability Protocol",
+    title: "SDR_UDP: Reliable Transport over UDP",
     period: "September 2025 - December 2025",
-    description: "Developing a Selective Repeat + Erasure Coding (EC-MDS-UDP) protocol inspired by SDR-RDMA middleware research, aimed at improving UDP reliability across lossy WANs.",
+    description: "Erasure coding reliability layer over UDP in C++ using Intel ISA-L Reed-Solomon for data recovery, with a TCP control channel for ACK/NACK signaling and Selective Repeat fallback when packet loss exceeds parity coverage.",
     achievements: [
-      "Implementing reliability mechanisms with Selective Repeat NACKs",
-      "Integrating Intel ISA-L for high-performance encoding and decoding",
-      "Building Docker-based simulation using Linux tc for packet loss emulation",
-      "Contributing to system architecture design and bitmap-based retransmission tracking"
+      "Sustained ~1000 Mbps steady throughput across 0-10% packet loss on 100 MiB to 1 GiB transfers",
+      "Measured SR-only throughput halved at 0.5% loss due to RTO waits, motivating the erasure-coded path",
+      "Built Docker-based simulation using Linux tc for packet loss emulation",
+      "Designed bitmap-based retransmission tracking and system architecture"
     ],
-    tags: ["C++", "Docker", "Python", "Networking"],
+    tags: ["C++", "UDP", "TCP", "Reed-Solomon", "Intel ISA-L"],
     color: "cyan",
     workInProgress: false
   },
   {
-    icon: Database,
-    title: "Global Financial Reconciliation Platform",
-    period: "November 2024 - July 2025",
-    description: "Led the development of a global financial reconciliation platform for AB InBev, digitizing and unifying financial workflows across four international regions.",
+    icon: Brain,
+    title: "Wirecracker: Clinical Decision Support Platform",
+    period: "November 2025 - June 2026",
+    description: "Backend REST APIs for spatial brain-region queries and patient data ingestion for a clinical decision-support platform used at UC Davis Neurology. Integrated with visualization frontends used by clinicians during pre-surgical evaluation.",
     achievements: [
-      "Led a 10-member engineering team, translating business requirements into technical designs",
-      "Improved delivery timelines from 7 months → 3 months through Agile sprint planning",
-      "Enhanced security posture with Snyk and policy enforcement",
-      "Automated complex reconciliation tasks with real-time data visibility"
+      "Built backend REST APIs for spatial brain-region queries and patient data ingestion",
+      "Integrated with visualization frontends used by clinicians during pre-surgical evaluation"
     ],
-    tags: ["React", "Flask", "MSSQL", "Azure"],
+    tags: ["TypeScript", "Node.js", "PostgreSQL"],
     color: "violet"
-  },
-  {
-    icon: Package,
-    title: "Finished Goods Management System",
-    period: "January 2024 - October 2024",
-    description: "Developed a finished goods management application that integrated Snowflake data lakes with operational databases to enable faster reporting and process traceability.",
-    achievements: [
-      "Designed data flow architecture using Azure Data Factory",
-      "Optimized SQL queries, reducing API response time from 20s → milliseconds",
-      "Created UI/UX design in Figma, implemented in React and Node.js",
-      "Built ETL pipelines connecting legacy systems with Snowflake"
-    ],
-    tags: ["React", "Node.js", "Snowflake", "Azure"],
-    color: "cyan"
   },
   {
     icon: Bot,
-    title: "Financial Reconciliation Automation Bot",
-    period: "August 2023 - December 2023",
-    description: "Built a Python-based automation bot that reconciled financial data from multiple global sources, reducing manual workload and errors.",
+    title: "Chaos-Tested LangGraph Agent",
+    period: "January 2026 - March 2026",
+    description: "12-node planner-executor-evaluator agent with ChromaDB memory and fault injection, built to test observability and reliability for LLM-based systems.",
     achievements: [
-      "Designed automation flow using Selenium for data validation",
-      "Reduced manual reconciliation efforts by 1.5 FTEs",
-      "Mentored an intern through complete POC to production deployment",
-      "Implemented secure credential management through Azure Key Vault"
+      "Dynamic replanning across 5 conditional edges with a custom JSONL telemetry layer tracking 8 span types",
+      "Fault-injection harness (timeouts, exceptions, malformed LLM outputs); 200+ sessions generating 10K+ log records",
+      "Categorized 185 failure modes; achieved 76% task completion under active failure conditions"
     ],
-    tags: ["Python", "Selenium", "Flask", "Azure"],
-    color: "violet"
-  },
-  {
-    icon: ThumbsUp,
-    title: "NPS Feedback Application",
-    period: "May 2022 - July 2022",
-    description: "Enhanced a Net Promoter Score (NPS) application used by over 3,000 employees to capture and analyze feedback from customers and partners.",
-    achievements: [
-      "Re-engineered frontend, reducing user clicks from 5 → 2",
-      "Improved query performance and response time",
-      "Collaborated with design teams to modernize UI components",
-      "Improved accessibility across the application"
-    ],
-    tags: ["React", "Flask", "SQL"],
+    tags: ["Python", "LangGraph", "LangChain", "ChromaDB"],
     color: "cyan"
   },
   {
-    icon: MapPin,
-    title: "Retailer Onboarding Portal",
-    period: "January 2022 - May 2022",
-    description: "Developed a geo-intelligent onboarding web application for 1,000+ retail users across North America, simplifying the retailer registration process.",
+    icon: Stethoscope,
+    title: "DentAI: AI-Assisted Dental X-Ray Review",
+    period: "February 2026",
+    description: "End-to-end clinical workflow for AI-assisted dental X-ray review, built at SacHacks 2026 (1st place, ~80 teams).",
     achievements: [
-      "Served as the sole developer for the full-stack system",
-      "Implemented geo-tagging and address search algorithms",
-      "Reduced onboarding time from 5 days → 1 day",
-      "Conducted stakeholder management and user acceptance testing"
+      "Fine-tuned a 2-model YOLOv8 detection ensemble behind an async FastAPI job queue, merging overlapping boxes at IoU >= 0.5",
+      "LLM report generator with a 4-tier provider fallback (Groq, Ollama, Hugging Face)",
+      "Corrections capture flow converts dentist edits back into YOLO-format retraining labels"
     ],
-    tags: ["React", "Node.js", "MSSQL", "Azure"],
+    tags: ["Python", "YOLOv8", "FastAPI", "SQLite", "Groq", "Hugging Face"],
     color: "emerald"
-  },
-  {
-    icon: AlertCircle,
-    title: "Complaint Management Portal",
-    period: "August 2021 - December 2021",
-    description: "Developed a ticketing and complaint management portal for both internal and external users, supporting over 1,000 users globally.",
-    achievements: [
-      "Designed and implemented complete frontend and backend architecture",
-      "Streamlined complaint logging, resolution tracking, and escalation workflows",
-      "Integrated role-based access control and secure authentication",
-      "Improved user satisfaction with intuitive interface"
-    ],
-    tags: ["React", "Node.js"],
-    color: "violet"
   },
   {
     icon: Trophy,
@@ -158,20 +112,6 @@ const projects: Project[] = [
     tags: ["Keras", "Flask", "IBM Watson", "ML"],
     color: "emerald",
     githubUrl: "https://github.com/Burnfireblaze/Pneumonia-Detection---CNN"
-  },
-  {
-    icon: Lightbulb,
-    title: "Hearing Impaired Translator Software (HITS)",
-    period: "August 2018 - September 2018",
-    description: "Developed a sign-language-to-text translator for the deaf and mute community, under the mentorship of Dr. Kyle Keane (MIT Assistive Technologies Lab).",
-    achievements: [
-      "Trained custom ML model to map hand gestures to English words",
-      "Implemented web-based interface for live gesture translation",
-      "Applied human-centered design principles",
-      "Focused on accessibility and inclusivity"
-    ],
-    tags: ["Flask", "ML", "Accessibility"],
-    color: "violet"
   }
 ];
 
@@ -314,10 +254,7 @@ export function Projects() {
           <h2 className="text-5xl md:text-6xl text-white mb-4">
             Featured <span className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">Projects</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto mb-4" />
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Showcasing innovation, research, and social impact through cutting-edge technology
-          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">

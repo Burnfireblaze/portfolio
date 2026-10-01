@@ -1,12 +1,4 @@
 import { motion } from "motion/react";
-import { Code2, Zap, Users, Award } from "lucide-react";
-
-const stats = [
-  { icon: Code2, label: "Years Experience", value: "3+" },
-  { icon: Zap, label: "Projects Delivered", value: "10+" },
-  { icon: Users, label: "Team Leadership", value: "8+" },
-  { icon: Award, label: "Awards Won", value: "12+" },
-];
 
 export function About() {
   return (
@@ -114,10 +106,10 @@ export function About() {
           <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+        <div className="max-w-3xl mx-auto mb-20">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="relative"
@@ -126,50 +118,16 @@ export function About() {
               <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-cyan-600/10 rounded-2xl" />
               <div className="relative space-y-6 text-gray-300">
                 <p className="text-lg leading-relaxed">
-                  Former software engineer with a passion for building innovative solutions that make a real impact. 
-                  Currently pursuing my Master's in Computer Science at UC Davis, I bring over 3 years of hands-on 
-                  experience in full stack development.
+                  I build software from the backend down into the systems underneath it. I am interested in APIs and data intensive services, distributed systems, performance engineering, reliability, and applied AI. That has led me to work on everything from query optimization and event driven services to reliable transport, consensus backed storage, and AI agents with memory, RAG, fault injection, and observability.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  My expertise spans across modern web technologies, cloud platforms (Microsoft Azure), and AI/ML. 
-                  I've led teams, optimized critical systems, and delivered projects that have saved thousands of 
-                  work hours and served thousands of users.
+                  At AB InBev, I spent 3+ years building production software for financial and supply chain platforms across 5 regions. A financial reconciliation platform handled 150M+ daily records and 100K+ accounts. I rewrote the query layer across 140+ MSSQL tables using predicate pushdown, deferred joins, and duplicate scan elimination, reducing submit reconciliation latency from ~50s to ~4s and cross table query latency from ~5s to ~200ms.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  I thrive in fast-paced environments where I can leverage my analytical problem-solving skills 
-                  and collaborate with cross-functional teams to create scalable, secure, and user-centric applications.
+                  At UC Davis, my current work includes DuckDB SQL integration for Apache ResilientDB around PBFT, reliable UDP transport using Reed Solomon erasure coding, backend development for Wirecracker at UC Davis Neurology, and a chaos tested LangGraph agent with iterative replanning, memory, fault injection, and telemetry.
                 </p>
               </div>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="grid grid-cols-2 gap-6"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="relative group"
-              >
-                <div className="relative p-6 bg-gradient-to-br from-violet-900/30 to-cyan-900/30 backdrop-blur-sm rounded-xl border border-violet-500/20 hover:border-violet-500/50 transition-all">
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-600/0 to-cyan-600/0 group-hover:from-violet-600/10 group-hover:to-cyan-600/10 rounded-xl transition-all" />
-                  <div className="relative">
-                    <stat.icon className="w-8 h-8 text-violet-400 mb-3" />
-                    <div className="text-3xl text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-400">{stat.label}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
 
